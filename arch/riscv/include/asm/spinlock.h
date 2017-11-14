@@ -25,7 +25,7 @@
 /* FIXME: Replace this with a ticket lock, like MIPS. */
 
 #define arch_spin_lock_flags(lock, flags) arch_spin_lock(lock)
-#define arch_spin_is_locked(x)	((x)->lock != 0)
+#define arch_spin_is_locked(x)	(READ_ONCE((x)->lock) != 0)
 
 static inline void arch_spin_unlock(arch_spinlock_t *lock)
 {
